@@ -14,10 +14,16 @@ import {
   DropdownItem,
   Badge
 } from 'reactstrap';
+import { Form, Input } from 'reactstrap';
+
+import Fade from 'react-reveal/Fade';
+
 //components
 import Home from './Home';
 import Movies from './Movies';
 import Tv from './Tv';
+import Registro from './Registro';
+import Login from './Login';
 
 import N from './favicon.jpg';
 
@@ -39,22 +45,29 @@ export default class Navigator extends React.Component {
     return (
       <BrowserRouter>
         <Navbar light expand="md">
-          <NavbarBrand href="/">
-            <img id="nav-icono" src={N} alt="Logo" />
-          </NavbarBrand>
-          <Badge color="danger">Netflex</Badge>
+          <Fade>
+            <NavbarBrand to="/">
+              <img className="box-shadow" id="nav-icono" src={N} alt="Logo" />
+            </NavbarBrand>
+            <Badge className="box-shadow" color="danger">Netflex</Badge>
+          </Fade>
           <NavbarToggler id="toggler" onClick={this.toggle} />
           <Collapse isOpen={this.state.isOpen} navbar>
             <Nav className="ml-auto" navbar>
-            <NavItem className="p-3">
-                  <Link className="link nav-link" to="/">Inicio</Link>
-                </NavItem>
-                <NavItem className="p-3">
-                  <Link className="link nav-link" to="/movies">Películas</Link>
-                </NavItem>
-                <NavItem className="p-3">
-                  <Link className="link nav-link" to="/tv">Series y Tv</Link>
-                </NavItem>
+              <NavItem className="p-3">
+                <Link className="link nav-link txt-shadow" to="/">Inicio</Link>
+              </NavItem>
+              <NavItem className="p-3">
+                <Link className="link nav-link txt-shadow" to="/movies">Películas</Link>
+              </NavItem>
+              <NavItem className="p-3">
+                <Link className="link nav-link txt-shadow" to="/tv">Series y Tv</Link>
+              </NavItem>
+              <NavItem>
+                <Form>
+                  <Input className="box-shadow" id="mysearch" placeholder="Buscar" />
+                </Form>
+              </NavItem>
 
             </Nav>
           </Collapse>
@@ -65,6 +78,8 @@ export default class Navigator extends React.Component {
           <Route exact path="/" component={Home} />
           <Route path="/movies" component={Movies} />
           <Route path="/tv" component={Tv} />
+          <Route path="/login" component={Login} />
+          <Route path="/registro" component={Registro} />
         </Switch>
 
       </BrowserRouter>
