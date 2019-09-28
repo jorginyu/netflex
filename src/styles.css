@@ -1,0 +1,21 @@
+body {
+    font-family: 'Roboto', sans-serif;
+    background: rgb(69, 72, 77);
+    background: -moz-linear-gradient(top, rgb(69, 72, 77) 0%, rgb(0, 0, 0) 100%);
+    background: -webkit-linear-gradient(top, rgb(69, 72, 77) 0%, rgb(0, 0, 0) 100%);
+    background: linear-gradient(to bottom, rgb(69, 72, 77) 0%, rgb(0, 0, 0) 100%);
+    filter: progid: DXImageTransform.Microsoft.gradient( startColorstr='#45484d', endColorstr='#000000', GradientType=0);
+}
+
+img#nav-icono {
+    display: block;
+    margin: 0%;
+    width: 35px;
+    vertical-align: middle;
+    cursor: pointer;
+    margin: 16px;
+}
+
+.navbar-light .navbar-nav .nav-link {
+    color: white;
+}
