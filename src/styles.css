@@ -7,13 +7,17 @@ body {
     filter: progid: DXImageTransform.Microsoft.gradient( startColorstr='#45484d', endColorstr='#000000', GradientType=0);
 }
 
+a:hover {
+    text-decoration: none;
+}
+
 div#myfooter {
     position: absolute;
     bottom: 0%;
     left: 0%;
     width: 100%;
     padding: 25px;
-    color: white;
+    color: red;
     background-color: black;
     text-align: center;
     font-size: 13px;
@@ -27,6 +31,11 @@ img#nav-icono {
     vertical-align: middle;
     cursor: pointer;
     margin: 16px;
+}
+
+img#title-icon {
+    margin: auto;
+    width: 40px;
 }
 
 input#mysearch {
