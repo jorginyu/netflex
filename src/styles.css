@@ -43,9 +43,9 @@ input#mysearch {
     margin-top: 16px;
     margin-left: 16px;
     width: 90%;
-    background-color: rgba(255, 255, 255, 0.383);
+    background-color: rgba(255, 255, 255, 0.808);
     border: none;
-    color: white;
+    color: black;
     text-align: center;
 }
 

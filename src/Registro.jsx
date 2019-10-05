@@ -1,5 +1,5 @@
 import React from 'react';
-import { Redirect } from "react-router-dom";
+import { Redirect, Switch } from "react-router-dom";
 import Arrow from './Arrow';
 import { Container, Button, Form, FormGroup, Label, Input, FormText, FormFeedback } from 'reactstrap';
 
@@ -15,7 +15,9 @@ export default class Login extends React.Component {
                email: '',
                passwd: '',
                passwdCheck: '',
+               pwdInput: 'box-shadow is-valid',
                token: '',
+               user: '',
                redirect: false
           };
           this.handleInputChange = this.handleInputChange.bind(this);
@@ -41,7 +43,7 @@ export default class Login extends React.Component {
                     passwd: this.state.passwd
                }
 
-               fetch(API + '/registro', {
+               return fetch(API + '/registro', {
                     method: 'POST',
                     headers: new Headers({ 'Content-Type': 'application/json' }),
                     body: JSON.stringify(user)
@@ -49,22 +51,40 @@ export default class Login extends React.Component {
                     .then(data => data.json())
                     .then(data => {
                          console.log(data);
-                         this.setState = {
-                           token: data,
-                           redirect: true
-                         };
+                         if (data.ok == true) {
+                              this.setState({
+                                   token: data.data.token,
+                                   user: data.data.user,
+                                   redirect: true
+                              });
+                         } else {
+                              console.log('Algo ha ido mal');
+                         }
+
+                         console.log('tot' + this.state.token, this.state.user, this.state.redirect);
                     })
                     .catch(err => console.log(err));
 
           } else {
                /* Añadir alerta en formulario... */
-               return console.log('jola');
+               this.setState = {
+                    inputStyle: 'box-shadow is-invalid'
+               }
           }
      }
 
      render() {
-          if(this.state.redirect === true) {
-               <Redirect to="/login" />
+          if (this.state.redirect) {
+               console.log('Redirigiendo...');
+               return <Switch>
+                    <Redirect
+                         to={{
+                              pathname: "/login",
+                              state: { user: this.state.user }
+                         }}
+                    />
+               </Switch>
+
           } else {
                console.log('Registro');
           }
@@ -72,32 +92,30 @@ export default class Login extends React.Component {
                <div>
                     <Container style={{ width: '65%' }}>
                          <Arrow />
-                         <hr />
                          <Form onSubmit={this.handleSubmit}>
                               <Zoom delay={500}>
                                    <FormGroup>
                                         <Label className="txt-shadow text-white" for="username">Nombre de usuario
                                         </Label>
-                                        <Input className="box-shadow" onChange={this.handleInputChange} type="text" name="username" id="username" placeholder="Nombre de usuario" />
-                                        <FormFeedback>You will not be able to see this</FormFeedback>
+                                        <Input required autoComplete="foo" className="box-shadow" onChange={this.handleInputChange} type="text" name="username" id="username" placeholder="Nombre de usuario" />
                                    </FormGroup>
                               </Zoom>
                               <Zoom delay={1000}>
                                    <FormGroup>
                                         <Label className="txt-shadow text-white" for="exampleEmail">Email</Label>
-                                        <Input onChange={this.handleInputChange} className="box-shadow" type="email" name="email" id="exampleEmail" placeholder="Email" />
+                                        <Input required autoComplete="foo" onChange={this.handleInputChange} className="box-shadow" type="email" name="email" id="exampleEmail" placeholder="Email" />
                                    </FormGroup>
                               </Zoom>
                               <Zoom delay={1400}>
                                    <FormGroup>
                                         <Label className="txt-shadow text-white" for="examplePassword">Contraseña</Label>
-                                        <Input onChange={this.handleInputChange} className="box-shadow" type="password" name="passwd" id="examplePassword" placeholder="Contraseña" />
+                                        <Input required autoComplete="foo" onChange={this.handleInputChange} className={this.state.inputStyle} type="password" name="passwd" id="examplePassword" placeholder="Contraseña" />
                                    </FormGroup>
                               </Zoom>
                               <Zoom delay={1600}>
                                    <FormGroup>
                                         <Label className="txt-shadow text-white" for="checkPwd">Repite la contraseña</Label>
-                                        <Input onChange={this.handleInputChange} className="box-shadow" type="password" name="passwdCheck" id="checkPwd" placeholder="Repite la contraseña" />
+                                        <Input required autoComplete="foo" onChange={this.handleInputChange} className="box-shadow" type="password" name="passwdCheck" id="checkPwd" placeholder="Repite la contraseña" />
                                    </FormGroup>
                               </Zoom>
                               <Zoom delay={1750}>

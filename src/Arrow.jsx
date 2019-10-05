@@ -8,6 +8,7 @@ export default class Arrow extends React.Component {
                     <i style={{ float: 'left', verticalAlign: 'middle' }} className="material-icons">
                          arrow_back_ios
                     </i> <Link to="/" className="text-danger">Volver</Link>
+                    <hr/>
                </div>
           );
      }
